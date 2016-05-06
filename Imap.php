@@ -131,11 +131,11 @@ class Imap {
      * @param $withbody without body
      */
     public function getUnreadMessages($withbody=true){
-    	$emails = [];
+      $emails = [];
         $result = imap_search($this->imap, 'UNSEEN');
         if($result){
             foreach($result as $k=>$i){
-            	$emails[]= $this->formatMessage($i, $withbody);
+              $emails[]= $this->formatMessage($i, $withbody);
             }
         }
         return $emails;
@@ -192,7 +192,7 @@ class Imap {
 
         // fetch unique uid
         $uid = imap_uid($this->imap, $id);
-	
+  
         // get email data
         $subject = '';
         if ( isset($header->subject) && strlen($header->subject) > 0 ) {
@@ -226,17 +226,17 @@ class Imap {
         $attachments = $this->attachments2name($this->getAttachments($this->imap, $id, $mailStruct, ""));
         if(count($attachments)>0) {
 
-			foreach ($attachments as $val) {
-				foreach ($val as $k=>$t) {
-					if ($k == 'name') {
-						$decodedName = imap_mime_header_decode($t);
-						$t = $this->convertToUtf8($decodedName[0]->text);
-					}
-				$arr[$k] = $t;
-				}
-			$email['attachments'][] = $arr;
-			}
-		}
+      foreach ($attachments as $val) {
+        foreach ($val as $k=>$t) {
+          if ($k == 'name') {
+            $decodedName = imap_mime_header_decode($t);
+            $t = $this->convertToUtf8($decodedName[0]->text);
+          }
+        $arr[$k] = $t;
+        }
+      $email['attachments'][] = $arr;
+      }
+    }
         return $email;
     }
     
@@ -373,14 +373,14 @@ class Imap {
      * @param $name of the folder
      * @param $subscribe immediately subscribe to folder
      */
-	public function addFolder($name, $subscribe = false) {
-		$success = imap_createmailbox($this->imap, $this->mailbox . $name);
+  public function addFolder($name, $subscribe = false) {
+    $success = imap_createmailbox($this->imap, $this->mailbox . $name);
 
-		if ($success && $subscribe) {
-			$success = imap_subscribe($this->imap, $this->mailbox . $name);
-		}
+    if ($success && $subscribe) {
+      $success = imap_subscribe($this->imap, $this->mailbox . $name);
+    }
 
-		return $success;
+    return $success;
     }
     
     
@@ -461,15 +461,15 @@ class Imap {
     public function saveMessageInSent($header, $body) {
         return imap_append($this->imap, $this->mailbox . $this->getSent(), $header . "\r\n" . $body . "\r\n", "\\Seen");
     }
-	
-	
-	/**
+  
+  
+  /**
      * explicitly close imap connection
      */
-	public function close() {
-		if($this->imap!==false)
+  public function close() {
+    if($this->imap!==false)
             imap_close($this->imap);
-	}
+  }
     
     
     
