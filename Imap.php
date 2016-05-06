@@ -240,7 +240,7 @@ class Imap
         if (count($attachments) > 0) {
             foreach ($attachments as $val) {
                 foreach ($val as $k => $t) {
-                    if ($k == 'name') {
+                    if ($k == 'name' && strlen($t)) {
                         $decodedName = imap_mime_header_decode($t);
                         $t = $this->convertToUtf8($decodedName[0]->text);
                     }
