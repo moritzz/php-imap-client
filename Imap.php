@@ -770,7 +770,7 @@ class Imap
                 $partStruct = imap_bodystruct($imap, $mailNum,
                     $partNum);
                 $attachmentDetails = array(
-                    'name' => $part->dparameters[0]->value,
+                    'name' => $partStruct->ifdparameters ? $part->dparameters[0]->value : '',
                     'partNum' => $partNum,
                     'enc' => $partStruct->encoding,
                     'size' => $part->bytes,
