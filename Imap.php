@@ -216,7 +216,7 @@ class Imap
         $email = array(
             'to' => isset($header->to) ? $this->arrayToAddress($header->to) : '',
             'from' => $this->toAddress($header->from[0]),
-            'date' => $header->date,
+            /* 'date' => $header->date, */
             'subject' => $subject,
             'uid' => $uid,
             'unread' => strlen(trim($header->Unseen)) > 0,
@@ -246,7 +246,7 @@ class Imap
                     }
                     $arr[$k] = $t;
                 }
-                $email['attachments'][] = $arr;
+                // $email['attachments'][] = $arr;
             }
         }
 
@@ -582,8 +582,8 @@ class Imap
         $names = array();
         foreach ($attachments as $attachment) {
             $names[] = array(
-                'name' => $attachment['name'],
-                'size' => $attachment['size'],
+                /* 'name' => $attachment['name'], */
+                /* 'size' => $attachment['size'], */
             );
         }
 
